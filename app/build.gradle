@@ -58,6 +58,10 @@ dependencies {
     //Room DB dependencies
     implementation "androidx.room:room-ktx:2.5.0"
     kapt "androidx.room:room-compiler:2.5.0"
+
+    //Navigation component library
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 }
 kapt {
     correctErrorTypes true
