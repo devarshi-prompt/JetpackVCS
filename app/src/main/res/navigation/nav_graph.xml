@@ -28,4 +28,5 @@
         android:name="com.example.jetpackvcs.ui.dashboard.fragments.UserListFragment"
         android:label="fragment_user_list"
         tools:layout="@layout/fragment_user_list" />
+
 </navigation>

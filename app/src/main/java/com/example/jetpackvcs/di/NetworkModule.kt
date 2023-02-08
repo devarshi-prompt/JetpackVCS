@@ -15,6 +15,7 @@ object NetworkModule {
 
     private const val BASE_URL = "https://reqres.in/"
 
+    @Provides
     fun provideRetrofit(): ApiService{
         return Retrofit.Builder()
             .baseUrl(BASE_URL)

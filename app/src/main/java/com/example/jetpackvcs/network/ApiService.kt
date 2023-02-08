@@ -17,4 +17,5 @@ interface ApiService {
 
     @POST("api/users")
     suspend fun getUsers(@Query("page") page: Int): Response<List<User>>
+
 }
