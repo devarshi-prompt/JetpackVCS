@@ -2,4 +2,7 @@
 <resources>
     <string name="splash_screen">Splash Screen</string>
     <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="email_username">Email/Username</string>
+    <string name="password">Password</string>
 </resources>

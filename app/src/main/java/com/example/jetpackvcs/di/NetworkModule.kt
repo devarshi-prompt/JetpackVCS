@@ -13,7 +13,7 @@ import retrofit2.http.POST
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://reqres.in/"
+    private const val BASE_URL = "https://reqres.in/api/"
 
     @Provides
     fun provideRetrofit(): ApiService{
