@@ -4,15 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable
-            name="onButtonClick"
-            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.auth.fragments.RegisterFragment">
+        tools:context=".ui.auth.register.RegisterFragment">
 
         <TextView
             android:id="@+id/textViewHeader"

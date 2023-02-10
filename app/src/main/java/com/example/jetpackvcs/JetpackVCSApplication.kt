@@ -1,4 +1,4 @@
-package com.example.jetpackvcs.app
+package com.example.jetpackvcs
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

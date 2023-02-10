@@ -4,15 +4,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <import type="android.view.View" />
         <variable
-            name="onButtonClick"
-            type="android.view.View.OnClickListener" />
+            name="viewmodel"
+            type="com.example.jetpackvcs.ui.auth.login.data.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.auth.fragments.LoginFragment">
+        tools:context=".ui.auth.login.LoginFragment">
 
         <TextView
             android:id="@+id/textViewHeader"
@@ -43,7 +44,8 @@
                 android:id="@+id/editTextLoginEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/login" />
+                android:hint="@string/login"
+                android:text="@={viewmodel.email}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -60,7 +62,9 @@
                 android:id="@+id/editTextLoginPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password"/>
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:text="@={viewmodel.password}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -74,7 +78,7 @@
             android:textAllCaps="false"
             android:padding="15dp"
             app:cornerRadius="15dp"
-            android:onClick="@{(v)->onButtonClick.onClick(v)}"
+            android:onClick="@={viewmodel::validation}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
@@ -84,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:visibility="gone"
+            android:visibility="@{viewmodel.isLoadingFlow ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />

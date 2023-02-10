@@ -1,35 +1,45 @@
 package com.example.jetpackvcs
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.fragment.NavHostFragment
-import com.example.jetpackvcs.utils.Constants
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import com.example.jetpackvcs.databinding.ActivityMainBinding
+import com.example.jetpackvcs.ui.splash.fragments.SplashFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    lateinit var binding: ActivityMainBinding
+    var isUserRegistered = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
-        manageStartDestination()
+        isUserRegistered = getSharedPreferences("isUserRegistered", MODE_PRIVATE).getBoolean("userRegistered",false)
+
+        manageAuthFragment()
     }
     override fun onBackPressed() {
         finishAffinity()
     }
 
-    private fun manageStartDestination(){
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val inflater = navHostFragment.navController.navInflater
-        val graph = inflater.inflate(R.navigation.nav_graph)
-
-        if (!Constants.isUserRegistered){
-            graph.setStartDestination(R.id.registerFragment)
-        }else {
-            graph.setStartDestination(R.id.loginFragment)
-        }
-
-        val navController = navHostFragment.navController
-        navController.setGraph(graph, intent.extras)
+    private fun manageAuthFragment(){
+        Handler(Looper.getMainLooper()).postDelayed({
+            val action = if (!isUserRegistered){
+                SplashFragmentDirections.actionSplashFragmentToRegisterFragment()
+            } else{
+                SplashFragmentDirections.actionSplashFragmentToLoginFragment()
+            }
+            Navigation.findNavController(findViewById(R.id.nav_host_fragment)).navigate(action)
+        },2000)
     }
 }

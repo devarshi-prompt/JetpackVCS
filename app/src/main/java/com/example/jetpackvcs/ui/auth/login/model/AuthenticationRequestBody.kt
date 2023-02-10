@@ -1,4 +1,4 @@
-package com.example.jetpackvcs.ui.auth.models
+package com.example.jetpackvcs.ui.auth.login.model
 
 import com.google.gson.annotations.SerializedName
 
