@@ -1,8 +1,8 @@
 package com.example.jetpackvcs.network
 
 import com.example.jetpackvcs.ui.auth.login.model.LoginResponse
-import com.example.jetpackvcs.ui.auth.login.model.AuthenticationRequestBody
-import com.example.jetpackvcs.ui.auth.register.RegisterResponse
+import com.example.jetpackvcs.ui.auth.auth_data.AuthenticationRequestBody
+import com.example.jetpackvcs.ui.auth.register.model.RegisterResponse
 import com.example.jetpackvcs.ui.dashboard.models.User
 import retrofit2.Response
 import retrofit2.http.Body

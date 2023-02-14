@@ -1,9 +1,9 @@
 package com.example.jetpackvcs.utils
 
-import com.example.jetpackvcs.ui.auth.login.model.LoginResponse
-
 sealed class ApiStates{
-    data class onSuccess(val response: LoginResponse): ApiStates()
-    data class onFailure(val error: String): ApiStates()
-    object isLoading: ApiStates()
+
+    //Use generics
+    data class OnSuccess(val response: Any): ApiStates()
+    data class OnFailure(val error: String): ApiStates()
+    object IsLoading: ApiStates()
 }

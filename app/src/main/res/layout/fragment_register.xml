@@ -4,6 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.example.jetpackvcs.ui.auth.auth_data.AuthViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +44,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextRegistrationEmail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="@={viewmodel.email}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -58,7 +63,8 @@
                 android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:text="@={viewmodel.password}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -72,7 +78,7 @@
             android:textAllCaps="false"
             android:padding="15dp"
             app:cornerRadius="15dp"
-            android:onClick="@{(v)->onButtonClick.onClick(v)}"
+            android:onClick="@{viewmodel::validation}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRegistrationPassword" />
@@ -82,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:visibility="gone"
+            android:visibility="@{viewmodel.isLoadingFlow()?View.VISIBLE:View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />

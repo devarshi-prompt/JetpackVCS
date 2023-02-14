@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/registerFragment">
 
     <fragment
         android:id="@+id/registerFragment"
@@ -18,27 +18,6 @@
         android:id="@+id/loginFragment"
         android:name="com.example.jetpackvcs.ui.auth.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_userListFragment"
-            app:destination="@id/userListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/userListFragment"
-        android:name="com.example.jetpackvcs.ui.dashboard.fragments.UserListFragment"
-        android:label="fragment_user_list"
-        tools:layout="@layout/fragment_user_list" />
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.example.jetpackvcs.ui.splash.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
-        <action
-            android:id="@+id/action_splashFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_login" />
 
 </navigation>
