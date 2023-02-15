@@ -4,6 +4,7 @@ import com.example.jetpackvcs.ui.auth.login.model.LoginResponse
 import com.example.jetpackvcs.ui.auth.auth_data.AuthenticationRequestBody
 import com.example.jetpackvcs.ui.auth.register.model.RegisterResponse
 import com.example.jetpackvcs.ui.dashboard.models.User
+import com.example.jetpackvcs.ui.dashboard.models.UserListResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -17,6 +18,6 @@ interface ApiService {
     suspend fun loginUser(@Body authenticationRequestBody: AuthenticationRequestBody): Response<LoginResponse>
 
     @POST("users")
-    suspend fun getUsers(@Query("page") page: Int): Response<List<User>>
+    suspend fun getUsers(@Query("page") page: Int): Response<UserListResponse>
 
 }

@@ -24,9 +24,9 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun manageStartDestination(){
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_auth) as NavHostFragment
         val inflater = navHostFragment.navController.navInflater
-        val graph = inflater.inflate(R.navigation.nav_graph)
+        val graph = inflater.inflate(R.navigation.auth_nav_graph)
 
         if (!isUserRegistered){
             graph.setStartDestination(R.id.registerFragment)

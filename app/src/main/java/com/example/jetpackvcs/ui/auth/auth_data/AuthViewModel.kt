@@ -5,6 +5,7 @@ import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.jetpackvcs.ui.auth.login.model.LoginResponse
 import com.example.jetpackvcs.utils.ApiStates
 import com.example.jetpackvcs.utils.Constants.Companion.isValidEmail
 import com.example.jetpackvcs.utils.Validation

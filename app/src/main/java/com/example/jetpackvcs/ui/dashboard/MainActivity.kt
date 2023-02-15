@@ -1,4 +1,4 @@
-package com.example.jetpackvcs.ui
+package com.example.jetpackvcs.ui.dashboard
 
 import android.os.Bundle
 import android.os.Handler
