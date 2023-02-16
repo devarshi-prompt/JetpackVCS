@@ -1,18 +1,17 @@
 package com.example.jetpackvcs.ui.auth.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.example.jetpackvcs.databinding.FragmentLoginBinding
 import com.example.jetpackvcs.ui.auth.auth_data.AuthViewModel
+import com.example.jetpackvcs.ui.dashboard.MainActivity
 import com.example.jetpackvcs.utils.ApiStates
-import com.example.jetpackvcs.utils.Constants
 import com.example.jetpackvcs.utils.Constants.Companion.toast
 import com.example.jetpackvcs.utils.Validation
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +37,7 @@ class LoginFragment : Fragment() {
                 when(it){
                     is Validation.ValidationSuccess -> {
                         observeStateFlow()
+                        startActivity(Intent(requireContext(),MainActivity::class.java))
                     }
                     is Validation.ValidationFailed -> {
                         toast(requireContext(),it.message).show()

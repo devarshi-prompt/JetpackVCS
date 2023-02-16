@@ -1,11 +1,11 @@
 package com.example.jetpackvcs.ui.auth.auth_data
 
-import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jetpackvcs.ui.auth.login.model.LoginResponse
+import com.example.jetpackvcs.ui.auth.register.model.RegisterResponse
 import com.example.jetpackvcs.utils.ApiStates
 import com.example.jetpackvcs.utils.Constants.Companion.isValidEmail
 import com.example.jetpackvcs.utils.Validation
@@ -15,14 +15,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(private val authRepository: AuthRepository) :
     ViewModel() {
 
-    val email = ObservableField("")
-    val password = ObservableField("")
+    val email = ObservableField("george.bluth@reqres.in")
+    val password = ObservableField("pistol")
     val isRegister = MutableStateFlow(true)
 
     val _isLoadingFlow = MutableStateFlow(false)
@@ -31,14 +32,14 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
     private val _loginValidationFlow = MutableSharedFlow<Validation>()
     val loginValidationFlow: SharedFlow<Validation> = _loginValidationFlow
 
-    private val _loginUiStatesFlow = MutableSharedFlow<ApiStates>()
-    val loginUiStatesFlow: SharedFlow<ApiStates> = _loginUiStatesFlow
+    private val _loginUiStatesFlow = MutableSharedFlow<ApiStates<Response<LoginResponse>>>()
+    val loginUiStatesFlow: SharedFlow<ApiStates<Response<LoginResponse>>> = _loginUiStatesFlow
 
     private val _registerValidationFlow = MutableSharedFlow<Validation>()
     val registerValidationFlow: SharedFlow<Validation> = _registerValidationFlow
 
-    private val _registerUiStatesFlow = MutableSharedFlow<ApiStates>()
-    val registerUiStatesFlow: SharedFlow<ApiStates> = _registerUiStatesFlow
+    private val _registerUiStatesFlow = MutableSharedFlow<ApiStates<Response<RegisterResponse>>>()
+    val registerUiStatesFlow: SharedFlow<ApiStates<Response<RegisterResponse>>> = _registerUiStatesFlow
 
     fun validation(view: View) {
         val validation: Validation = when {

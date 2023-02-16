@@ -1,13 +1,9 @@
 package com.example.jetpackvcs.utils
 
-import com.example.jetpackvcs.ui.dashboard.models.User
-import retrofit2.Response
-
-sealed class ApiStates{
+sealed class ApiStates<out T>{
 
     //Use generics
-    data class OnSuccess(val response: Response<*>): ApiStates()
-
-    data class OnFailure(val error: String): ApiStates()
-    object IsLoading: ApiStates()
+    data class OnSuccess<T>(val response: T): ApiStates<T>()
+    data class OnFailure(val error: String): ApiStates<Nothing>()
+    object IsLoading: ApiStates<Nothing>()
 }

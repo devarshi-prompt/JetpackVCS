@@ -5,20 +5,24 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
-import com.example.jetpackvcs.ui.dashboard.models.User
+import com.example.jetpackvcs.ui.dashboard.models.UserListResponse
 import com.example.jetpackvcs.utils.ApiStates
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class UserListViewModel @Inject constructor(private val userListRepository: UserListRepository) :
     ViewModel() {
 
-    private val _userListUiStatesFlow = MutableSharedFlow<ApiStates>()
-    val userListUiStatesFlow: SharedFlow<ApiStates> = _userListUiStatesFlow
+    val isLoading = MutableStateFlow(false)
+
+    private val _userListUiStatesFlow = MutableSharedFlow<ApiStates<Response<UserListResponse>>>()
+    val userListUiStatesFlow: SharedFlow<ApiStates<Response<UserListResponse>>> = _userListUiStatesFlow
 
     fun getAllUsers() {
         viewModelScope.launch {
@@ -27,10 +31,9 @@ class UserListViewModel @Inject constructor(private val userListRepository: User
 
                 _userListUiStatesFlow.emit(ApiStates.IsLoading)
                 if (response.isSuccessful) {
-                    _userListUiStatesFlow.emit(ApiStates.OnSuccess(response.body()?.data))
+                    _userListUiStatesFlow.emit(ApiStates.OnSuccess(response))
                 } else {
-                    _userListUiStatesFlow.emit(
-                        ApiStates.OnFailure(response.errorBody()?.string().toString()))
+                    _userListUiStatesFlow.emit(ApiStates.OnFailure(response.errorBody()?.string().toString()))
                 }
             } catch (e: Exception) {
                 _userListUiStatesFlow.emit(ApiStates.OnFailure(e.message.toString()))
