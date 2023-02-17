@@ -1,7 +1,6 @@
 package com.example.jetpackvcs.ui.dashboard
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ class UserListFragment : Fragment() {
 
     private var binding: FragmentUserListBinding by autoCleared()
     val viewModel: UserListViewModel by viewModels()
-    //lateinit var adapter: UserListAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View {
@@ -38,7 +36,9 @@ class UserListFragment : Fragment() {
                 when(it){
                     is ApiStates.OnSuccess ->{
                         viewModel.isLoading.value = false
-                        Log.d("UserResponseSuccess", "observeStatesFlow: ${it.response.body()?.data}")
+                        binding.recyclerViewUserList.apply {
+                            adapter = it.response.body()?.data?.let { it1 -> UserListAdapter(it1) }
+                        }
                     }
                     is ApiStates.OnFailure ->{
                         viewModel.isLoading.value = false

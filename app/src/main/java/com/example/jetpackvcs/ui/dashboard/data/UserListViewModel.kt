@@ -42,6 +42,8 @@ class UserListViewModel @Inject constructor(private val userListRepository: User
     }
 
     companion object {
+
+        @JvmStatic
         @BindingAdapter("app:imageUrl")
         fun setImageUrl(view: ImageView, url: String) {
             Glide.with(view.context).load(url).into(view)
